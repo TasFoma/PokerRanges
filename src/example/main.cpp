@@ -1,6 +1,5 @@
-#include "range/Card.h"      // кавычки, не <>, и правильный путь
+#include "range/Card.h"
 #include "range/Hand.h"
-#include "range/RangeManager.h"  // RangeManager.h, а не Manager.h
 #include <iostream>
 
 int main() {

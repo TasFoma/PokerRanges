@@ -14,7 +14,6 @@ void RangeManager::createClusters() {
 
     for (int r1 = 12; r1 >= 0; r1--) {
         for (int r2 = 12; r2 >= 0; r2--) {
-            // Всегда ставим старший ранг первым
             int hi = std::max(r1, r2);
             int lo = std::min(r1, r2);
             std::string name;
@@ -22,11 +21,11 @@ void RangeManager::createClusters() {
             name += ranks[lo];
 
             if (r1 == r2) {
-                clusters_.push_back(Cluster(name));// Пары
+                clusters_.push_back(Cluster(name));
             } else if (r1 > r2) {
-                clusters_.push_back(Cluster(name + "s"));// Одномастные
+                clusters_.push_back(Cluster(name + "s")); // Одномастные выше диагонали:
             } else {
-                clusters_.push_back(Cluster(name + "o"));// Разномастные
+                clusters_.push_back(Cluster(name + "o")); // Разномастные ниже диагонали:
             }
         }
     }
@@ -34,6 +33,7 @@ void RangeManager::createClusters() {
     for (int i = 0; i < 1326; i++) {
         Hand hand = Hand::fromIndex(i);
         std::string clusterName = hand.getClusterName();
+
         for (auto &cluster : clusters_) {
             if (cluster.getName() == clusterName) {
                 cluster.addHand(i);
