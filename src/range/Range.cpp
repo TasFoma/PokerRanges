@@ -40,7 +40,7 @@ void Range::generateRandom() {
         setStrategy(i, f, c, b);
     }
 
-    std::cout << "Generated random range for " << TOTAL_HANDS << " hands" << "\n";
+    //std::cout << "Generated random range for " << TOTAL_HANDS << " hands" << "\n";
     checkNormalized();
 }
 
@@ -55,6 +55,6 @@ bool Range::checkNormalized() const {
             return false;
         }
     }
-     std::cout << "  CHECK SUCCESSFUL "   << "\n";
+     //std::cout << "  CHECK SUCCESSFUL "   << "\n";
     return true;
 }

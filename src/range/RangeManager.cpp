@@ -12,18 +12,21 @@ Range RangeManager::generate() {
 void RangeManager::createClusters() {
     const char *ranks = "23456789TJQKA";
 
-    for (int r1 = 12; r1 >= 0; r1--) {     // строки от A до 2
-        for (int r2 = 12; r2 >= 0; r2--) { // столбцы от A до 2
+    for (int r1 = 12; r1 >= 0; r1--) {
+        for (int r2 = 12; r2 >= 0; r2--) {
+            // Всегда ставим старший ранг первым
+            int hi = std::max(r1, r2);
+            int lo = std::min(r1, r2);
             std::string name;
-            name += ranks[r1];
-            name += ranks[r2];
+            name += ranks[hi];
+            name += ranks[lo];
 
             if (r1 == r2) {
-                clusters_.push_back(Cluster(name));
+                clusters_.push_back(Cluster(name));// Пары
             } else if (r1 > r2) {
-                clusters_.push_back(Cluster(name + "s")); // Одномастные выше диагонали:
+                clusters_.push_back(Cluster(name + "s"));// Одномастные
             } else {
-                clusters_.push_back(Cluster(name + "o")); // Разномастные ниже диагонали:
+                clusters_.push_back(Cluster(name + "o"));// Разномастные
             }
         }
     }
@@ -31,8 +34,6 @@ void RangeManager::createClusters() {
     for (int i = 0; i < 1326; i++) {
         Hand hand = Hand::fromIndex(i);
         std::string clusterName = hand.getClusterName();
-
-        // Находим нужный кластер и добавляем руку
         for (auto &cluster : clusters_) {
             if (cluster.getName() == clusterName) {
                 cluster.addHand(i);
